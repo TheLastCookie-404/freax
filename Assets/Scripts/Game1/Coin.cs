@@ -11,7 +11,7 @@ public class Coin : MonoBehaviour
             CoinCollector collector = other.GetComponent<CoinCollector>();
             if (collector != null)
             {
-                collector.AddCoins(coinValue);
+                collector.AddCoin(coinValue);
             }
             Destroy(gameObject);  // Удаляем монету после сбора
         }
