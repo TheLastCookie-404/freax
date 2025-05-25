@@ -2,29 +2,15 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    public string requiredKeyID; // ID ключа, который открывает эту дверь
+    public string requiredKey = "red";
 
-    private bool isOpen = false;
-
-    void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (isOpen) return;
-
-        if (other.CompareTag("Player"))
+        KeyInventory inventory = other.GetComponent<KeyInventory>();
+        if (inventory != null && inventory.HasKey(requiredKey))
         {
-            KeyInventory inventory = other.GetComponent<KeyInventory>();
-            if (inventory != null && inventory.HasKey(requiredKeyID))
-            {
-                OpenDoor();
-            }
+            Debug.Log("Дверь открыта!");
+            Destroy(gameObject); // или Destroy(GetComponent<Collider2D>()) если хочешь оставить визуально
         }
-    }
-
-    void OpenDoor()
-    {
-        isOpen = true;
-        Debug.Log("Дверь открыта ключом: " + requiredKeyID);
-        // Можно проиграть анимацию, звук и т.п.
-        gameObject.SetActive(false); // Просто отключаем дверь
     }
 }

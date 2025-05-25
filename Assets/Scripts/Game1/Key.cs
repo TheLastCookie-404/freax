@@ -2,18 +2,15 @@ using UnityEngine;
 
 public class Key : MonoBehaviour
 {
-    public string keyID; // Уникальный ID ключа, например "Red", "Blue"
+    public string keyID = "red"; // Уникальный ID ключа
 
-    void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        KeyInventory inventory = other.GetComponent<KeyInventory>();
+        if (inventory != null)
         {
-            KeyInventory inventory = other.GetComponent<KeyInventory>();
-            if (inventory != null)
-            {
-                inventory.AddKey(keyID);
-                Destroy(gameObject);
-            }
+            inventory.AddKey(keyID);
+            Destroy(gameObject); // Удаляем ключ
         }
     }
 }

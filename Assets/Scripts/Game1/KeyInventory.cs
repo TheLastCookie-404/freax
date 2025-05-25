@@ -5,17 +5,14 @@ public class KeyInventory : MonoBehaviour
 {
     private HashSet<string> keys = new HashSet<string>();
 
-    public void AddKey(string keyID)
+    public void AddKey(string key)
     {
-        if (!keys.Contains(keyID))
-        {
-            keys.Add(keyID);
-            Debug.Log("Ключ добавлен: " + keyID);
-        }
+        keys.Add(key);
+        Debug.Log("Ключ добавлен: " + key);
     }
 
-    public bool HasKey(string keyID)
+    public bool HasKey(string key)
     {
-        return keys.Contains(keyID);
+        return keys.Contains(key);
     }
 }
