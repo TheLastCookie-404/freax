@@ -11,7 +11,7 @@ public class PlayerAnimationController : MonoBehaviour
 
   void Update()
   {
-    if (Input.GetKey(KeyCode.W))
+    if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
     {
       animator.Play("Walk");
     }
