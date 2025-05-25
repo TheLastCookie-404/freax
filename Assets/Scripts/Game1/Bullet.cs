@@ -2,19 +2,24 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public int damage = 1;
     public float lifetime = 3f;
 
     void Start()
     {
-        Destroy(gameObject, lifetime); // Удалить пулю через N секунд
+        Destroy(gameObject, lifetime);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Здесь можно прописать урон
-        if (other.CompareTag("Enemy"))
+        Enemy enemy = other.GetComponent<Enemy>();
+        if (enemy != null)
         {
-            Debug.Log("Попадание по врагу!");
+            enemy.TakeDamage(damage);
+            Destroy(gameObject);
+        }
+        else if (!other.CompareTag("Player") && !other.CompareTag("Bullet"))
+        {
             Destroy(gameObject);
         }
     }
